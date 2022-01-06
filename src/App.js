@@ -1,7 +1,6 @@
 import './App.css';
-import 'materialize-css/dist/css/materialize.min.css'
-
-import Main from './components/Main'
+import Main from './components/Main';
+import '@fontsource/roboto/500.css';
 
 function App() {
   return (
