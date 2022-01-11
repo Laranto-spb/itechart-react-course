@@ -1,8 +1,9 @@
-import * as React from 'react';
-import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import {
+  AppBar, Toolbar, Typography, IconButton,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Header = () => {
+function Header() {
   return (
     <AppBar position="static">
       <Toolbar variant="dense">
