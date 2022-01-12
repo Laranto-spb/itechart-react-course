@@ -36,12 +36,12 @@ function Main() {
       <Grid container spacing={3}>
 
         {
-          cards.map(({ id, title, body }) => (
-            <Grid key={id} item xs={12} lg={4}>
-              <CardItem title={title} body={body} />
-            </Grid>
-          ))
-        }
+                    cards.map(({ id, title, body }) => (
+                      <Grid key={id} item xs={12} lg={4}>
+                        <CardItem title={title} body={body} />
+                      </Grid>
+                    ))
+                }
 
       </Grid>
 

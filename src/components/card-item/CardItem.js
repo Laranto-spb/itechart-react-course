@@ -1,13 +1,9 @@
 import {
-  Card, CardContent, Typography, CardActions, Button,
+  Button, Card, CardActions, CardContent, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
 function CardItem({ title, body }) {
-  CardItem.propTypes = {
-    title: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired,
-  };
   return (
     <Card>
       <CardContent>
@@ -24,5 +20,10 @@ function CardItem({ title, body }) {
     </Card>
   );
 }
+
+CardItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+};
 
 export default CardItem;

@@ -1,5 +1,5 @@
 import {
-  AppBar, Toolbar, Typography, IconButton,
+  AppBar, IconButton, Toolbar, Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
