@@ -27,12 +27,7 @@ const CARDS = [
 function Main() {
   const [cards, setCards] = useState(CARDS);
 
-  const setNewCard = (cardTitle, cardBody) => {
-    const newCard = {
-      id: uuidv4(),
-      title: cardTitle,
-      body: cardBody,
-    };
+  const setNewCard = (newCard) => {
     setCards([...cards, newCard]);
   };
 
