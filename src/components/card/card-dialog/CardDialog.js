@@ -8,8 +8,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { TextField } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
+import { isBlank } from '../../utils/utils';
 
-function CardDialog({ params }) {
+function CardDialog({ addCard }) {
   const [open, setOpen] = useState(false);
   const [cardTitle, setTitle] = useState(null);
   const [cardBody, setBody] = useState(null);
@@ -23,22 +24,16 @@ function CardDialog({ params }) {
     setBody(null);
   };
 
-  function isCardValid() {
-    const isValid = !cardTitle || !cardBody || !cardTitle.trim().length || !cardBody.trim().length;
-    return !isValid;
-  }
-
-  const addCard = (isConfirmed = true) => {
-    const validCard = isCardValid();
-    if (isConfirmed && validCard) {
-      const newCard = {
+  const saveCard = (isConfirmed = true) => {
+    const isInvalid = isBlank(cardTitle) || isBlank(cardBody);
+    if (isConfirmed && !isInvalid) {
+      addCard({
         id: uuidv4(),
         title: cardTitle.trim(),
         body: cardBody.trim(),
-      };
-      params(newCard);
+      });
     }
-    setOpen(false);
+    setOpen((prev) => !prev);
     clearState();
   };
 
@@ -55,7 +50,7 @@ function CardDialog({ params }) {
       <Button variant="outlined" onClick={handleClickOpen} sx={{ mb: 2 }}>
         Add new card
       </Button>
-      <Dialog open={open} onClose={() => addCard(false)} sx={{ p: 2 }}>
+      <Dialog open={open} onClose={() => saveCard(false)} sx={{ p: 2 }}>
         <DialogTitle>Add new card</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -81,8 +76,8 @@ function CardDialog({ params }) {
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => addCard(false)}>Cancel</Button>
-          <Button onClick={addCard}>Submit</Button>
+          <Button onClick={() => saveCard(false)}>Cancel</Button>
+          <Button onClick={saveCard}>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>
@@ -90,7 +85,7 @@ function CardDialog({ params }) {
 }
 
 CardDialog.propTypes = {
-  params: PropTypes.func.isRequired,
+  addCard: PropTypes.func.isRequired,
 };
 
 export default CardDialog;

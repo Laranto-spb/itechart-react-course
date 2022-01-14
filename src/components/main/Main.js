@@ -38,7 +38,7 @@ function Main() {
         React Course
       </Typography>
 
-      <CardDialog params={setNewCard} />
+      <CardDialog addCard={setNewCard} />
 
       <Grid container spacing={3}>
 
