@@ -3,7 +3,8 @@ import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Grid } from '@mui/material';
-import CardItem from '../card-item/CardItem';
+import CardItem from '../card/card-item/CardItem';
+import CardDialog from '../card/card-dialog/CardDialog';
 
 const CARDS = [
   {
@@ -24,7 +25,11 @@ const CARDS = [
 ];
 
 function Main() {
-  const [cards] = useState(CARDS);
+  const [cards, setCards] = useState(CARDS);
+
+  const setNewCard = (newCard) => {
+    setCards([...cards, newCard]);
+  };
 
   return (
     <Container maxWidth="xl">
@@ -32,6 +37,8 @@ function Main() {
         <span className="main-red">iTechArt</span>
         React Course
       </Typography>
+
+      <CardDialog addCard={setNewCard} />
 
       <Grid container spacing={3}>
 
