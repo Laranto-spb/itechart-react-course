@@ -1,9 +1,15 @@
 import {
-  Button, Card, CardActions, CardContent, Typography,
+  Card, CardActions, CardContent, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
+import CardDialog from '../card-dialog/CardDialog';
 
-function CardItem({ title, body }) {
+function CardItem({
+  id,
+  title,
+  body,
+  editCard,
+}) {
   return (
     <Card>
       <CardContent>
@@ -15,13 +21,15 @@ function CardItem({ title, body }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <CardDialog updCard={editCard} cardId={id} />
       </CardActions>
     </Card>
   );
 }
 
 CardItem.propTypes = {
+  editCard: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
 };

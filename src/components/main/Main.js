@@ -31,6 +31,16 @@ function Main() {
     setCards([...cards, newCard]);
   };
 
+  const updateCard = (updatedCard) => {
+    const newCards = cards.map((card) => {
+      if (card.id === updatedCard.id) {
+        return updatedCard;
+      }
+      return card;
+    });
+    setCards(newCards);
+  };
+
   return (
     <Container maxWidth="xl">
       <Typography sx={{ textAlign: 'center' }} variant="h1" component="div" gutterBottom>
@@ -49,7 +59,7 @@ function Main() {
             body,
           }) => (
             <Grid key={id} item xs={12} lg={4}>
-              <CardItem title={title} body={body} />
+              <CardItem editCard={updateCard} id={id} title={title} body={body} />
             </Grid>
           ))
         }

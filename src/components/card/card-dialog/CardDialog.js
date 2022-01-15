@@ -10,7 +10,11 @@ import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 import { isBlank } from '../../utils/utils';
 
-function CardDialog({ addCard }) {
+function CardDialog({
+  addCard,
+  cardId,
+  updCard,
+}) {
   const [open, setOpen] = useState(false);
   const [cardTitle, setTitle] = useState(null);
   const [cardBody, setBody] = useState(null);
@@ -37,6 +41,19 @@ function CardDialog({ addCard }) {
     clearState();
   };
 
+  const editCard = () => {
+    const isInvalid = isBlank(cardTitle) || isBlank(cardBody);
+    if (!isInvalid) {
+      updCard({
+        id: cardId,
+        title: cardTitle.trim(),
+        body: cardBody.trim(),
+      });
+    }
+    setOpen((prev) => !prev);
+    clearState();
+  };
+
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -45,13 +62,23 @@ function CardDialog({ addCard }) {
     setBody(e.target.value);
   };
 
+  let button;
+
+  if (addCard) {
+    button = <Button onClick={saveCard}>Submit</Button>;
+  } else {
+    button = <Button onClick={editCard}>Edit</Button>;
+  }
+
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen} sx={{ mb: 2 }}>
-        Add new card
+        {addCard ? 'Add new card' : 'Edit'}
       </Button>
       <Dialog open={open} onClose={() => saveCard(false)} sx={{ p: 2 }}>
-        <DialogTitle>Add new card</DialogTitle>
+        <DialogTitle>
+          {addCard ? 'Add new card' : 'Edit new card'}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please fill in details
@@ -77,7 +104,7 @@ function CardDialog({ addCard }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => saveCard(false)}>Cancel</Button>
-          <Button onClick={saveCard}>Submit</Button>
+          {button}
         </DialogActions>
       </Dialog>
     </div>
@@ -85,7 +112,9 @@ function CardDialog({ addCard }) {
 }
 
 CardDialog.propTypes = {
-  addCard: PropTypes.func.isRequired,
+  addCard: PropTypes.func,
+  updCard: PropTypes.func,
+  cardId: PropTypes.string,
 };
 
 export default CardDialog;
