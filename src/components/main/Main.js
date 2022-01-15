@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import CardItem from '../card/card-item/CardItem';
 import CardDialog from '../card/card-dialog/CardDialog';
 
@@ -41,14 +41,20 @@ function Main() {
     setCards([...newCards]);
   };
 
+  const removeCard = (cardId) => {
+    const filtered = cards.filter((card) => card.id !== cardId);
+    setCards([...filtered]);
+  };
+
   return (
     <Container maxWidth="xl">
       <Typography sx={{ textAlign: 'center' }} variant="h1" component="div" gutterBottom>
         <span className="main-red">iTechArt</span>
         React Course
       </Typography>
-
-      <CardDialog addCard={setNewCard} />
+      <Box sx={{ mb: 2 }}>
+        <CardDialog addCard={setNewCard} />
+      </Box>
 
       <Grid container spacing={3}>
 
@@ -59,7 +65,13 @@ function Main() {
             body,
           }) => (
             <Grid key={id} item xs={12} lg={4}>
-              <CardItem editCard={updateCard} id={id} title={title} body={body} />
+              <CardItem
+                deleteCard={removeCard}
+                editCard={updateCard}
+                id={id}
+                title={title}
+                body={body}
+              />
             </Grid>
           ))
         }

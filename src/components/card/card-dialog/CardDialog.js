@@ -71,13 +71,13 @@ function CardDialog({
   }
 
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen} sx={{ mb: 2 }}>
+    <>
+      <Button variant="outlined" onClick={handleClickOpen}>
         {addCard ? 'Add new card' : 'Edit'}
       </Button>
       <Dialog open={open} onClose={() => saveCard(false)} sx={{ p: 2 }}>
         <DialogTitle>
-          {addCard ? 'Add new card' : 'Edit new card'}
+          {addCard ? 'Add new card' : 'Edit card'}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -107,9 +107,15 @@ function CardDialog({
           {button}
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }
+
+CardDialog.defaultProps = {
+  addCard: undefined,
+  updCard: undefined,
+  cardId: undefined,
+};
 
 CardDialog.propTypes = {
   addCard: PropTypes.func,
