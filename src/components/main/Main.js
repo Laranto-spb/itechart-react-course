@@ -38,7 +38,7 @@ function Main() {
       }
       return card;
     });
-    setCards(newCards);
+    setCards([...newCards]);
   };
 
   return (
