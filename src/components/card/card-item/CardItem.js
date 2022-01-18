@@ -6,9 +6,7 @@ import Button from '@mui/material/Button';
 import CardDialog from '../card-dialog/CardDialog';
 
 function CardItem({
-  id,
-  title,
-  body,
+  item,
   editCard,
   deleteCard,
 }) {
@@ -16,15 +14,15 @@ function CardItem({
     <Card>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {title && title}
+          {item && item.title}
         </Typography>
         <Typography variant="body">
-          {body && body}
+          {item && item.body}
         </Typography>
       </CardContent>
       <CardActions>
-        <CardDialog updCard={editCard} cardId={id} />
-        <Button onClick={() => deleteCard(id)} variant="outlined" color="error">Delete</Button>
+        <CardDialog updCard={editCard} card={item} />
+        <Button onClick={() => deleteCard(item.id)} variant="outlined" color="error">Delete</Button>
       </CardActions>
     </Card>
   );
@@ -32,9 +30,11 @@ function CardItem({
 
 CardItem.propTypes = {
   editCard: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+  }).isRequired,
   deleteCard: PropTypes.func.isRequired,
 };
 

@@ -59,18 +59,12 @@ function Main() {
       <Grid container spacing={3}>
 
         {
-          cards.map(({
-            id,
-            title,
-            body,
-          }) => (
-            <Grid key={id} item xs={12} lg={4}>
+          cards.map((it) => (
+            <Grid key={it.id} item xs={12} lg={4}>
               <CardItem
                 deleteCard={removeCard}
                 editCard={updateCard}
-                id={id}
-                title={title}
-                body={body}
+                item={it}
               />
             </Grid>
           ))

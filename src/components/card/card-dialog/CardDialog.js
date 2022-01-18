@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -12,46 +12,36 @@ import { isBlank } from '../../utils/utils';
 
 function CardDialog({
   addCard,
-  cardId,
+  card,
   updCard,
 }) {
   const [open, setOpen] = useState(false);
-  const [cardTitle, setTitle] = useState(null);
-  const [cardBody, setBody] = useState(null);
+  const [cardTitle, setTitle] = useState(card.title);
+  const [cardBody, setBody] = useState(card.body);
+
+  useEffect(() => {
+    if (open) {
+      setTitle(card.title);
+      setBody(card.body);
+    }
+  }, [open]);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const clearState = () => {
-    setTitle(null);
-    setBody(null);
-  };
-
   const saveCard = (isConfirmed = true) => {
+    const isExists = !!card.id;
+    const handler = isExists ? updCard : addCard;
     const isInvalid = isBlank(cardTitle) || isBlank(cardBody);
     if (isConfirmed && !isInvalid) {
-      addCard({
-        id: uuidv4(),
+      handler({
+        id: isExists ? card.id : uuidv4(),
         title: cardTitle.trim(),
         body: cardBody.trim(),
       });
+      setOpen((prev) => !prev);
     }
-    setOpen((prev) => !prev);
-    clearState();
-  };
-
-  const editCard = () => {
-    const isInvalid = isBlank(cardTitle) || isBlank(cardBody);
-    if (!isInvalid) {
-      updCard({
-        id: cardId,
-        title: cardTitle.trim(),
-        body: cardBody.trim(),
-      });
-    }
-    setOpen((prev) => !prev);
-    clearState();
   };
 
   const handleTitleChange = (e) => {
@@ -62,22 +52,14 @@ function CardDialog({
     setBody(e.target.value);
   };
 
-  let button;
-
-  if (addCard) {
-    button = <Button onClick={saveCard}>Submit</Button>;
-  } else {
-    button = <Button onClick={editCard}>Edit</Button>;
-  }
-
   return (
     <>
       <Button variant="outlined" onClick={handleClickOpen}>
-        {addCard ? 'Add new card' : 'Edit'}
+        {card.id ? 'Edit' : 'Add new card'}
       </Button>
-      <Dialog open={open} onClose={() => saveCard(false)} sx={{ p: 2 }}>
+      <Dialog open={open} onClose={() => setOpen(false)} sx={{ p: 2 }}>
         <DialogTitle>
-          {addCard ? 'Add new card' : 'Edit card'}
+          {card.id ? 'Edit card' : 'Add new card'}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -103,8 +85,10 @@ function CardDialog({
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => saveCard(false)}>Cancel</Button>
-          {button}
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
+          <Button onClick={saveCard}>
+            {card.id ? 'Edit' : 'Submit'}
+          </Button>
         </DialogActions>
       </Dialog>
     </>
@@ -114,13 +98,20 @@ function CardDialog({
 CardDialog.defaultProps = {
   addCard: undefined,
   updCard: undefined,
-  cardId: undefined,
+  card: {
+    title: null,
+    body: null,
+  },
 };
 
 CardDialog.propTypes = {
   addCard: PropTypes.func,
   updCard: PropTypes.func,
-  cardId: PropTypes.string,
+  card: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    body: PropTypes.string,
+  }),
 };
 
 export default CardDialog;
