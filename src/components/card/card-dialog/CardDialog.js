@@ -72,6 +72,7 @@ function CardDialog({
               label="Card title"
               variant="outlined"
               onChange={handleTitleChange}
+              value={cardTitle}
             />
           </div>
           <div>
@@ -80,6 +81,7 @@ function CardDialog({
               label="Card text"
               variant="outlined"
               onChange={handleBodyChange}
+              value={cardBody}
             />
           </div>
 
