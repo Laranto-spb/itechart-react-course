@@ -72,7 +72,7 @@ function CardDialog({
               label="Card title"
               variant="outlined"
               onChange={handleTitleChange}
-              value={cardTitle}
+              value={cardTitle || ''}
             />
           </div>
           <div>
@@ -81,7 +81,7 @@ function CardDialog({
               label="Card text"
               variant="outlined"
               onChange={handleBodyChange}
-              value={cardBody}
+              value={cardBody || ''}
             />
           </div>
 
@@ -110,7 +110,7 @@ CardDialog.propTypes = {
   addCard: PropTypes.func,
   updCard: PropTypes.func,
   card: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
     body: PropTypes.string,
   }),

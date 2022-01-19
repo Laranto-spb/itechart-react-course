@@ -11,7 +11,7 @@ function CardItem({
   deleteCard,
 }) {
   return (
-    <Card>
+    <Card sx={{ height: '100%' }}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {item && item.title}
