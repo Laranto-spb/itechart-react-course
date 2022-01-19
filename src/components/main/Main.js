@@ -32,18 +32,14 @@ function Main() {
   };
 
   const updateCard = (updatedCard) => {
-    const newCards = cards.map((card) => {
-      if (card.id === updatedCard.id) {
-        return updatedCard;
-      }
-      return card;
-    });
-    setCards([...newCards]);
+    const newCards = [...cards];
+    const cardIndex = cards.findIndex((card) => card.id === updatedCard.id);
+    newCards[cardIndex] = updatedCard;
+    setCards(newCards);
   };
 
   const removeCard = (cardId) => {
-    const filtered = cards.filter((card) => card.id !== cardId);
-    setCards([...filtered]);
+    setCards((prevCards) => prevCards.filter((card) => card.id !== cardId));
   };
 
   return (
