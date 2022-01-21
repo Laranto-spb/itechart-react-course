@@ -1,26 +1,22 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Box, Grid } from '@mui/material';
 import CardItem from '../card/card-item/CardItem';
 import CardDialog from '../card/card-dialog/CardDialog';
+import { cardApiResult } from '../../services/apiClient';
 
 function Main() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then((response) => {
-        setCards(response.data);
-      });
+    cardApiResult.cards.getAll()
+      .then((res) => setCards((res.data)));
   }, []);
 
   const setNewCard = (newCard) => {
-    axios.post('https://jsonplaceholder.typicode.com/posts')
-      .then((response) => {
-        console.log('Server response: ', response.status);
-      });
+    cardApiResult.cards.create(newCard)
+      .then((res) => console.log('Server response: ', res.status));
     setCards([...cards, newCard]);
   };
 

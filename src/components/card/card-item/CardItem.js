@@ -31,7 +31,7 @@ function CardItem({
 CardItem.propTypes = {
   editCard: PropTypes.func.isRequired,
   item: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
   }).isRequired,
