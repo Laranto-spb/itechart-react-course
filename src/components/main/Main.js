@@ -4,18 +4,18 @@ import Container from '@mui/material/Container';
 import { Box, Grid } from '@mui/material';
 import CardItem from '../card/card-item/CardItem';
 import CardDialog from '../card/card-dialog/CardDialog';
-import { cardApiResult } from '../../services/apiClient';
+import { cardApi } from '../../services/apiClient';
 
 function Main() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    cardApiResult.cards.getAll()
+    cardApi.cards.getAll()
       .then((res) => setCards((res.data)));
   }, []);
 
   const setNewCard = (newCard) => {
-    cardApiResult.cards.create(newCard)
+    cardApi.cards.create(newCard)
       .then((res) => console.log('Server response: ', res.status));
     setCards([...cards, newCard]);
   };

@@ -13,4 +13,4 @@ function initApiClient() {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const cardApiResult = initApiClient();
+export const cardApi = initApiClient();
