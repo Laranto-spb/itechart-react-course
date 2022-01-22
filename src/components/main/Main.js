@@ -1,33 +1,22 @@
-import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Box, Grid } from '@mui/material';
 import CardItem from '../card/card-item/CardItem';
 import CardDialog from '../card/card-dialog/CardDialog';
-
-const CARDS = [
-  {
-    id: uuidv4(),
-    title: 'Card 1',
-    body: 'Text of Card 1',
-  },
-  {
-    id: uuidv4(),
-    title: 'Card 2',
-    body: 'Text of Card 2',
-  },
-  {
-    id: uuidv4(),
-    title: 'Card 3',
-    body: 'Text of Card 3',
-  },
-];
+import { cardApi } from '../../services/apiClient';
 
 function Main() {
-  const [cards, setCards] = useState(CARDS);
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    cardApi.cards.getAll()
+      .then((res) => setCards((res.data)));
+  }, []);
 
   const setNewCard = (newCard) => {
+    cardApi.cards.create(newCard)
+      .then((res) => console.log('Server response: ', res.status));
     setCards([...cards, newCard]);
   };
 
