@@ -5,12 +5,7 @@ import PropTypes from 'prop-types';
 function Header({ drawerWidth }) {
   const isCardPage = useMatch('/cards');
 
-  let width;
-  if (isCardPage) {
-    width = drawerWidth;
-  } else {
-    width = 0;
-  }
+  const width = isCardPage ? drawerWidth : 0;
   return (
     <AppBar
       position="static"

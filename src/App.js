@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import CardsPage from './routes/CardsPage/CardsPage';
-import MainPage from './routes/MainPage/MainPage';
+import CardsPage from './pages/CardsPage/CardsPage';
+import MainPage from './pages/MainPage/MainPage';
 import '@fontsource/roboto/500.css';
 import Header from './components/header/Header';
 
