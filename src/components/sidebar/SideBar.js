@@ -1,5 +1,6 @@
+import { Link as RouterLink } from 'react-router-dom';
 import {
-  Box, Divider, Drawer, Link, List, ListItem, ListItemText,
+  Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemText,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
@@ -21,7 +22,18 @@ function SideBar({ sideWidth }) {
       <Divider />
       <List>
         <ListItem>
-          <ListItemText><Link href="/main">Main page</Link></ListItemText>
+          <RouterLink
+            to="/main"
+            style={{
+              textDecoration: 'none',
+              width: '100%',
+              color: 'blue',
+            }}
+          >
+            <ListItemButton>
+              <ListItemText primary="Main" />
+            </ListItemButton>
+          </RouterLink>
         </ListItem>
       </List>
     </Drawer>

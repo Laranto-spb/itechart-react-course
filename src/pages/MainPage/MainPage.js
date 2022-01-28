@@ -1,5 +1,6 @@
 import { Button, Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 
 const mainContainerStyle = {
   display: 'flex',
@@ -16,16 +17,17 @@ function MainPage() {
         <span className="main-red">iTechArt </span>
         React Course
       </Typography>
-      <Button
-        variant="contained"
-        href="/cards"
-        sx={{
-          width: 200,
-          height: 50,
-        }}
-      >
-        Go to cards
-      </Button>
+      <Link to="/cards" style={{ textDecoration: 'none' }}>
+        <Button
+          variant="contained"
+          sx={{
+            width: 200,
+            height: 50,
+          }}
+        >
+          Go to cards
+        </Button>
+      </Link>
     </Container>
 
   );
