@@ -1,15 +1,20 @@
-import {
-  AppBar, IconButton, Toolbar, Typography,
-} from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Toolbar, Typography } from '@mui/material';
+import { useMatch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function Header() {
+function Header({ drawerWidth }) {
+  const isCardPage = useMatch('/cards');
+
+  const width = isCardPage ? drawerWidth : 0;
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      sx={{
+        width: `calc(100% - ${width}px)`,
+        ml: `${width}px`,
+      }}
+    >
       <Toolbar variant="dense">
-        <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-          <MenuIcon />
-        </IconButton>
         <Typography variant="h6" color="inherit" component="div">
           iTechArt React Course
         </Typography>
@@ -17,5 +22,9 @@ function Header() {
     </AppBar>
   );
 }
+
+Header.propTypes = {
+  drawerWidth: PropTypes.number.isRequired,
+};
 
 export default Header;
