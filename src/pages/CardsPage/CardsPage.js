@@ -6,6 +6,7 @@ import CardItem from '../../components/card/card-item/CardItem';
 import CardDialog from '../../components/card/card-dialog/CardDialog';
 import { cardApi } from '../../services/apiClient';
 import SideBar from '../../components/sidebar/SideBar';
+import CardTabs from '../../components/card/card-tabs/CardTabs';
 
 function CardsPage({ drawerWidth }) {
   const [cards, setCards] = useState([]);
@@ -36,6 +37,7 @@ function CardsPage({ drawerWidth }) {
     <Box sx={{ display: 'flex' }}>
       <SideBar sideWidth={drawerWidth} />
       <Container maxWidth="xl" sx={{ pt: 3 }}>
+        <CardTabs />
         <Box sx={{ mb: 2 }}>
           <CardDialog addCard={setNewCard} />
         </Box>
@@ -43,16 +45,16 @@ function CardsPage({ drawerWidth }) {
         <Grid container spacing={3}>
 
           {
-            cards.map((it) => (
-              <Grid key={it.id} item xs={12} lg={4}>
-                <CardItem
-                  deleteCard={removeCard}
-                  editCard={updateCard}
-                  item={it}
-                />
-              </Grid>
-            ))
-          }
+              cards.map((it) => (
+                <Grid key={it.id} item xs={12} lg={4}>
+                  <CardItem
+                    deleteCard={removeCard}
+                    editCard={updateCard}
+                    item={it}
+                  />
+                </Grid>
+              ))
+            }
 
         </Grid>
       </Container>
