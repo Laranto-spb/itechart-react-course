@@ -3,9 +3,9 @@ import { useMatch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function Header({ drawerWidth }) {
-  const isCardPage = useMatch('/cards');
+  const isRootPage = useMatch('/main');
 
-  const width = isCardPage ? drawerWidth : 0;
+  const width = isRootPage ? 0 : drawerWidth;
   return (
     <AppBar
       position="static"

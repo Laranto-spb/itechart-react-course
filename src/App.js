@@ -14,10 +14,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<MainPage />} />
-        <Route path="/main" element={<MainPage />} />
-        <Route path="/cards" element={<CardsPage drawerWidth={drawerWidth} />} />
-        <Route path="/test" element={<CardDetailsPage />} />
-        <Route path="/*" element={<NotFoundPage />} />
+        <Route path="main" element={<MainPage />} />
+        <Route path="cards" element={<CardsPage drawerWidth={drawerWidth} />} />
+        <Route path="cards/:id" element={<CardDetailsPage drawerWidth={drawerWidth} />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

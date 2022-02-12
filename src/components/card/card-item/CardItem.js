@@ -14,6 +14,7 @@ function CardItem({
     <Card sx={{ height: '100%' }}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
+          {/* TODO: first empty object then full - correct get request? */}
           {item && item.title}
         </Typography>
         <Typography variant="body">
