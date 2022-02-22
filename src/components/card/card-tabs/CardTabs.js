@@ -24,7 +24,7 @@ function CardTabs() {
           component={Link}
           to={`/cards/${item.page}`}
           {...item}
-        {/*    TODO Add all cards item and initial page from url*/}
+        // TODO Add all cards item and initial page from url
         />
       )}
     />
