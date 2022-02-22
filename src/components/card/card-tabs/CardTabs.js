@@ -13,13 +13,8 @@ const boxStyle = {
 
 function CardTabs() {
   const [cards, setCards] = useState([]);
-
   const navigate = useNavigate();
   const { id } = useParams();
-
-  const routeAllCards = () => {
-    navigate('/cards');
-  };
 
   useEffect(() => {
     cardApi.cards.getAll()
@@ -27,6 +22,10 @@ function CardTabs() {
         setCards(data);
       });
   }, []);
+
+  const routeAllCards = () => {
+    navigate('/cards');
+  };
 
   return (
     <Box sx={boxStyle}>

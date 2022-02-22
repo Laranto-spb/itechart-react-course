@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Typography, Box } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -19,19 +19,29 @@ function CardDetailsPage({ drawerWidth }) {
     title: '',
     body: '',
   });
+  const { id } = useParams();
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    cardApi.cards.get(id)
+      .then((res) => {
+        if (isMounted.current) {
+          setCardInfo(res.data);
+        }
+      });
+  }, [id]);
 
   const updateCard = (updatedItem) => {
     setCardInfo(updatedItem);
   };
 
-  const { id } = useParams();
-
-  useEffect(() => {
-    cardApi.cards.get(id)
-      .then((res) => {
-        setCardInfo(res.data);
-      });
-  }, [id]);
   return (
     <Box sx={{ display: 'flex' }}>
       <SideBar sideWidth={drawerWidth} />
