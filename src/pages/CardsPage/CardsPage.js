@@ -8,6 +8,13 @@ import { cardApi } from '../../services/apiClient';
 import SideBar from '../../components/sidebar/SideBar';
 import CardTabs from '../../components/card/card-tabs/CardTabs';
 
+const cardsContainerStyle = {
+  paddingTop: '30px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+};
+
 function CardsPage({ drawerWidth }) {
   const [cards, setCards] = useState([]);
 
@@ -36,7 +43,7 @@ function CardsPage({ drawerWidth }) {
   return (
     <Box sx={{ display: 'flex' }}>
       <SideBar sideWidth={drawerWidth} />
-      <Container maxWidth="xl" sx={{ pt: 3 }}>
+      <Container maxWidth="xl" sx={cardsContainerStyle}>
         <Box sx={{ marginBottom: '50px' }}>
           <CardTabs />
         </Box>
