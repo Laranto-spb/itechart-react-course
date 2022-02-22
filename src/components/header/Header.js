@@ -1,11 +1,15 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { useMatch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import CardTabs from '../card/card-tabs/CardTabs';
 
 function Header({ drawerWidth }) {
-  const isRootPage = useMatch('/main');
+  const isMainPage = useMatch('/main');
+  const isRootPage = useMatch('/');
+  const isCardsPage = useMatch('/cards');
+  const isCardInfoPage = useMatch('/cards/*');
 
-  const width = isRootPage ? 0 : drawerWidth;
+  const width = isRootPage || isMainPage ? 0 : drawerWidth;
   return (
     <AppBar
       position="static"
@@ -14,10 +18,11 @@ function Header({ drawerWidth }) {
         ml: `${width}px`,
       }}
     >
-      <Toolbar variant="dense">
-        <Typography variant="h6" color="inherit" component="div">
+      <Toolbar variant="regular">
+        <Typography variant="h6" color="inherit" component="div" sx={{ mr: 3 }}>
           iTechArt React Course
         </Typography>
+        {(isCardsPage || isCardInfoPage) && <CardTabs />}
       </Toolbar>
     </AppBar>
   );

@@ -31,8 +31,9 @@ function CardTabs() {
   return (
     <Box sx={boxStyle}>
       <Pagination
-        color="primary"
-        defaultPage={0}
+        sx={{ mr: 3 }}
+        color="standard"
+        page={+id || 0}
         count={cards.length}
         variant="outlined"
         renderItem={(item) => (
@@ -43,7 +44,7 @@ function CardTabs() {
           />
         )}
       />
-      {id && <Button variant="outlined" onClick={routeAllCards}>All cards</Button>}
+      {id && <Button variant="outlined" color="inherit" onClick={routeAllCards}>All cards</Button>}
     </Box>
   );
 }

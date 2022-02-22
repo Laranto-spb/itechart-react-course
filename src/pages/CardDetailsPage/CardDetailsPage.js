@@ -4,7 +4,6 @@ import { Container, Typography, Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import { cardApi } from '../../services/apiClient';
 import CardItem from '../../components/card/card-item/CardItem';
-import CardTabs from '../../components/card/card-tabs/CardTabs';
 import SideBar from '../../components/sidebar/SideBar';
 
 const cardContainerStyle = {
@@ -37,9 +36,6 @@ function CardDetailsPage({ drawerWidth }) {
     <Box sx={{ display: 'flex' }}>
       <SideBar sideWidth={drawerWidth} />
       <Container sx={cardContainerStyle}>
-        <Box sx={{ marginBottom: '50px' }}>
-          <CardTabs />
-        </Box>
         <Typography variant="h2" align="center">Cards details</Typography>
         <Box maxWidth="50%">
           <CardItem item={cardInfo} editCard={updateCard} />

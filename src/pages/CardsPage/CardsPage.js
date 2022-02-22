@@ -6,7 +6,6 @@ import CardItem from '../../components/card/card-item/CardItem';
 import CardDialog from '../../components/card/card-dialog/CardDialog';
 import { cardApi } from '../../services/apiClient';
 import SideBar from '../../components/sidebar/SideBar';
-import CardTabs from '../../components/card/card-tabs/CardTabs';
 
 const cardsContainerStyle = {
   paddingTop: '30px',
@@ -44,9 +43,6 @@ function CardsPage({ drawerWidth }) {
     <Box sx={{ display: 'flex' }}>
       <SideBar sideWidth={drawerWidth} />
       <Container maxWidth="xl" sx={cardsContainerStyle}>
-        <Box sx={{ marginBottom: '50px' }}>
-          <CardTabs />
-        </Box>
         <Box sx={{ marginBottom: '50px' }}>
           <CardDialog addCard={setNewCard} />
         </Box>
