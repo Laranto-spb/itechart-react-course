@@ -37,11 +37,12 @@ function CardsPage({ drawerWidth }) {
     <Box sx={{ display: 'flex' }}>
       <SideBar sideWidth={drawerWidth} />
       <Container maxWidth="xl" sx={{ pt: 3 }}>
-        <CardTabs />
-        <Box sx={{ mb: 2 }}>
+        <Box sx={{ marginBottom: '50px' }}>
+          <CardTabs />
+        </Box>
+        <Box sx={{ marginBottom: '50px' }}>
           <CardDialog addCard={setNewCard} />
         </Box>
-
         <Grid container spacing={3}>
 
           {

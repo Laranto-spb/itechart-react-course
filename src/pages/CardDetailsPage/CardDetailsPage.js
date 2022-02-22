@@ -15,14 +15,14 @@ const cardContainerStyle = {
 };
 
 function CardDetailsPage({ drawerWidth }) {
-  const [cardInfo, setCardInfo] = useState({});
+  const [cardInfo, setCardInfo] = useState({
+    name: '',
+    title: '',
+    body: '',
+  });
 
   const updateCard = (updatedItem) => {
     setCardInfo(updatedItem);
-  };
-
-  const deleteCard = () => {
-    setCardInfo({});
   };
 
   const { id } = useParams();
@@ -37,10 +37,12 @@ function CardDetailsPage({ drawerWidth }) {
     <Box sx={{ display: 'flex' }}>
       <SideBar sideWidth={drawerWidth} />
       <Container sx={cardContainerStyle}>
-        <CardTabs />
+        <Box sx={{ marginBottom: '50px' }}>
+          <CardTabs />
+        </Box>
         <Typography variant="h2" align="center">Cards details</Typography>
         <Box maxWidth="50%">
-          <CardItem item={cardInfo} editCard={updateCard} deleteCard={deleteCard} />
+          <CardItem item={cardInfo} editCard={updateCard} />
         </Box>
       </Container>
     </Box>
