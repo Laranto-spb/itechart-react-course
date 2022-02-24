@@ -2,13 +2,11 @@ import {
   Card, CardActions, CardContent, Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
 import CardDialog from '../card-dialog/CardDialog';
 
 function CardItem({
   item,
   editCard,
-  deleteCard,
 }) {
   return (
     <Card sx={{ height: '100%' }}>
@@ -22,7 +20,6 @@ function CardItem({
       </CardContent>
       <CardActions>
         <CardDialog updCard={editCard} card={item} />
-        <Button onClick={() => deleteCard(item.id)} variant="outlined" color="error">Delete</Button>
       </CardActions>
     </Card>
   );
@@ -35,7 +32,6 @@ CardItem.propTypes = {
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
   }).isRequired,
-  deleteCard: PropTypes.func.isRequired,
 };
 
 export default CardItem;
